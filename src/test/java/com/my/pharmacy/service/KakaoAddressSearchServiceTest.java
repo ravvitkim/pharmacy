@@ -13,6 +13,9 @@ class KakaoAddressSearchServiceTest {
     @Autowired
     KakaoAddressSearchService kakaoAddressSearchService;
 
+    @Autowired
+    KakaoCategorySearchService kakaoCategorySearchService;
+
     @Test
     @DisplayName("API KEY Test")
     void test() {
@@ -27,4 +30,15 @@ class KakaoAddressSearchServiceTest {
                 .requestAddressSearch("강남대로 405");
         System.out.println(dto);
     }
+    @Test
+    @DisplayName("Search Category Test")
+    void categoryTest() {
+        KakaoApiResponseDto dto = new KakaoApiResponseDto();
+        double x = 127.026692446306;
+        double y = 37.4987750083767;
+        double radius = 1000;
+        dto = kakaoCategorySearchService.resultCategorySearch(y, x, radius);
+        System.out.println(dto);
+    }
+
 }
