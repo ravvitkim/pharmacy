@@ -1,16 +1,16 @@
-package com.my.pharmarcy.controller;
+package com.my.pharmacy.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FormController {
-    @GetMapping
+    @GetMapping("/")
     public String mainForm() {
         return "main";
     }
 
-    @GetMapping
+    @GetMapping("/output")
     public String outputForm() {
         return "output";
     }
