@@ -6,6 +6,7 @@ import com.my.pharmacy.dto.KakaoApiResponseDto;
 import com.my.pharmacy.dto.OutputDto;
 import com.my.pharmacy.service.KakaoAddressSearchService;
 import com.my.pharmacy.service.KakaoCategorySearchService;
+import com.my.pharmacy.service.PharmacyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,12 @@ public class FormController {
 
     private final KakaoAddressSearchService kakaoAddressSearchService;
     private final KakaoCategorySearchService kakaoCategorySearchService;
+    private final PharmacyService pharmacyService;
 
-    public FormController(KakaoAddressSearchService kakaoAddressSearchService, KakaoCategorySearchService kakaoCategorySearchService) {
+    public FormController(KakaoAddressSearchService kakaoAddressSearchService, KakaoCategorySearchService kakaoCategorySearchService, PharmacyService pharmacyService) {
         this.kakaoAddressSearchService = kakaoAddressSearchService;
         this.kakaoCategorySearchService = kakaoCategorySearchService;
+        this.pharmacyService = pharmacyService;
     }
 
     @GetMapping("/")
@@ -50,6 +53,7 @@ public class FormController {
         List<OutputDto> outputDtoList =
                 kakaoCategorySearchService.makeOutputDto(
                         recommendationDto.getDocumentList());
+        pharmacyService.saveAll(outputDtoList);
         System.out.println(outputDtoList);
         model.addAttribute("outputList", outputDtoList);
         return "output";
