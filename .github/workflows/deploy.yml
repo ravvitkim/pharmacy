@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - name: backend
-            context: backend
+            context: pharmacy
             imagename: pharmacy     # ← 앞의 네임스페이스는 빼고
 #          - name: frontend
 #            context: frontend
