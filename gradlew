@@ -249,5 +249,5 @@ eval "set -- $(
     )" '"$@"'
 
 exec "$JAVACMD" "$@"
-# gradlew 실행 권한 추가
-RUN chmod +x ./gradlew
+## gradlew 실행 권한 추가
+#RUN chmod +x ./gradlew
