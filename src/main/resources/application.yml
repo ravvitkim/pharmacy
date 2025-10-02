@@ -1,23 +1,58 @@
-#MySQL 셋팅
+server:
+  port: 8080
+
 spring:
+  profiles:
+    active: prod
+    group:
+      local:
+        - common
+      prod:
+        - common
+kakao:
+  rest:
+    api:
+      key: ${KAKAO_REST_API_KEY}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: common
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pharmacy?serverTimezone=UTC&useSSL=false
-    username: ${DB_USER}
-    password: ${DB_PW}
-  sql:
-    init:
-      mode: NEVER
+    url: jdbc:mysql://localhost:3306/pharmacy?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
-    defer-datasource-initialization: false
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: update   # 최초 개발 단계에만 update 권장 → 생성 후 validate로 변경
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
-kakao:
-  rest:
-    api:
-      key: ${KAKAO_REST_API_KEY}
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://pharmacyrds.cjwa0sg0s2v7.ap-northeast-2.rds.amazonaws.com:3306/pharmacy?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: admin
+    password: rlaalfo5541!!
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update # 운영은 validate 고정
+    properties:
+      hibernate:
+        show_sql: false
