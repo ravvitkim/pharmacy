@@ -46,7 +46,7 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://pharmacyrds.cjwa0sg0s2v7.ap-northeast-2.rds.amazonaws.com:3306/pharmacy?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${RDS_ENDPOINT}:3306/pharmacy?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: admin
     password: rlaalfo5541!!
   jpa:

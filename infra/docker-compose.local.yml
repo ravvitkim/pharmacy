@@ -18,13 +18,13 @@ services:
       retries: 10
 
   backend:
-    build: ../backend
+    build: ../pharmacy
     container_name: backend
     env_file:
       - .env.local.back
     environment:
       SPRING_PROFILES_ACTIVE: local
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/myapp?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=utf8
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/pharmacy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=utf8
       SPRING_DATASOURCE_USERNAME: root
     ports:
       - "8080:8080"
